@@ -1,5 +1,6 @@
 package com.example.lab3_msist;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -122,15 +123,19 @@ public class AuthorizationActivity extends AppCompatActivity {
                 String resStr = response.body().string().toString();
                 try {
                     JSONObject json = new JSONObject(resStr);
-                    JSONArray jsonArrayErrors = json.getJSONArray("errors");
-                    JSONObject error = new JSONObject(jsonArrayErrors.get(0).toString());
 
-                    if(error.length() > 0)
-                    {
+                    if (json.get("token").toString().length() > 0) {
+                        Intent intent = new Intent(AuthorizationActivity.this, Profile.class);
+                        intent.putExtra("token", json.get("token").toString());
+                        startActivity(intent);
+                    } else {
+                        // вроде не робит
+                        JSONArray jsonArrayErrors = json.getJSONArray("errors");
+                        JSONObject error = new JSONObject(jsonArrayErrors.get(0).toString());
                         Toast.makeText(getApplicationContext(), error.get("message").toString(), Toast.LENGTH_SHORT).show();
                     }
 
-                   // Log.d("myJson", error.get("message").toString());
+//                    Log.d("myJson",  json.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
