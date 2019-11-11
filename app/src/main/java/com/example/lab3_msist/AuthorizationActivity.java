@@ -124,12 +124,11 @@ public class AuthorizationActivity extends AppCompatActivity {
                 try {
                     JSONObject json = new JSONObject(resStr);
 
-                    if (json.get("token").toString().length() > 0) {
+                    if (json.has("token")) {
                         Intent intent = new Intent(AuthorizationActivity.this, Profile.class);
                         intent.putExtra("token", json.get("token").toString());
                         startActivity(intent);
-                    } else {
-                        // вроде не робит
+                    } else if(json.has("errors")){
                         JSONArray jsonArrayErrors = json.getJSONArray("errors");
                         JSONObject error = new JSONObject(jsonArrayErrors.get(0).toString());
                         Toast.makeText(getApplicationContext(), error.get("message").toString(), Toast.LENGTH_SHORT).show();
