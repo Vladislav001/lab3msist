@@ -1,5 +1,6 @@
 package com.example.lab3_msist;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -19,6 +20,8 @@ import okhttp3.Response;
 
 public class Profile extends Activity{
 
+    private String url= "https://lab1msist.herokuapp.com/profile";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +29,19 @@ public class Profile extends Activity{
 
         Bundle arguments = getIntent().getExtras();
         String token = arguments.get("token").toString();
+
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .header("x-access-token", token)
+                .build();
+        new Profile.AsyncHttpRequest().execute(request);
+
         Log.d("myTokenProfile2",  token);
     }
 
+
+    @SuppressLint("StaticFieldLeak")
     public class AsyncHttpRequest extends AsyncTask<Request, Void, Response> {
         @Override
         protected Response doInBackground(Request... requests) {
@@ -48,6 +61,7 @@ public class Profile extends Activity{
             try {
 
                 String resStr = response.body().string().toString();
+                Log.d("myList",  resStr);
 
             } catch (IOException e) {
                 e.printStackTrace();

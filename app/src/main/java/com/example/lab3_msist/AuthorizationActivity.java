@@ -1,5 +1,6 @@
 package com.example.lab3_msist;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class AuthorizationActivity extends AppCompatActivity {
     private EditText password;
     private Button login;
     private TextView mTextViewResult;
-    public String url= "https://lab1msist.herokuapp.com/user/login";
+    private String url= "https://lab1msist.herokuapp.com/user/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,49 +60,9 @@ public class AuthorizationActivity extends AppCompatActivity {
                 .build();
         new AsyncHttpRequest().execute(request);
 
-        // Если введенные логин и пароль будут словом "admin",
-        // показываем Toast сообщение об успешном входе:
-//        if (email.getText().toString().equals("admin") &&
-//                password.getText().toString().equals("admin")) {
-//            Toast.makeText(getApplicationContext(), "Вход выполнен!", Toast.LENGTH_SHORT).show();
-//
-//            // Выполняем переход на другой экран:
-//            Intent intent = new Intent(AuthorizationActivity.this, Profile.class);
-//            startActivity(intent);
-//        }
-//        else
-//        {
-//            Toast.makeText(getApplicationContext(), "Неправильные данные!",Toast.LENGTH_SHORT).show();
-//        }
     }
 
-//    @SuppressLint("StaticFieldLeak")
-//    class AsyncHttpRequest extends AsyncTask<Request, Void, Response> {
-//
-//        @Override
-//        protected Response doInBackground(Request... requests) {
-//            Response response = null;
-//            try {
-//                OkHttpClient client = new OkHttpClient();
-//                response = client.newCall(requests[0]).execute();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return response;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Response response) {
-//            super.onPostExecute(response);
-//            try {
-//                Log.d("myRes", Objects.requireNonNull(response.body()).string());
-//                //txtRequest.setText(response.body().string());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
+    @SuppressLint("StaticFieldLeak")
     public class AsyncHttpRequest extends AsyncTask<Request, Void, Response> {
         @Override
         protected Response doInBackground(Request... requests) {
