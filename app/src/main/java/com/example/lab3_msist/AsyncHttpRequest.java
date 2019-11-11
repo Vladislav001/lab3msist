@@ -27,7 +27,7 @@ public class AsyncHttpRequest extends AsyncTask<Request, Void, Response> {
     protected void onPostExecute(Response response) {
         super.onPostExecute(response);
         try {
-            Log.d("myRes33", Objects.requireNonNull(response.body()).string());
+            Log.d("myRes", Objects.requireNonNull(response.body()).string());
             //txtRequest.setText(response.body().string());
         } catch (IOException e) {
             e.printStackTrace();
