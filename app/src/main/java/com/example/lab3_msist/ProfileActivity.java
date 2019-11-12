@@ -20,8 +20,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 // http://developer.alexanderklimov.ru/android/views/listview.php
@@ -44,9 +46,13 @@ public class ProfileActivity extends Activity{
                 .build();
         new ProfileActivity.AsyncHttpRequest().execute(request);
 
+    }
 
 
-
+    // Обрабатываем нажатие кнопки "Добавить показания":
+    public void AddCounter(View view) {
+        Intent intent = new Intent(ProfileActivity.this, AddActivity.class);
+        startActivity(intent);
     }
 
 
