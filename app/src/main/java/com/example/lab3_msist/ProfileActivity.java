@@ -13,12 +13,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -80,7 +85,23 @@ public class ProfileActivity extends Activity{
             super.onPostExecute(response);
             try {
 
-                String resStr = response.body().string().toString();
+                String resStr = response.body().string();
+                Log.d("myRes",  resStr);
+
+                // Now do the magic.
+                //Data data = new Gson().fromJson(resStr, Data.class);
+
+//                Map<Integer, Data> mapItems = new HashMap<Integer, Data>();
+//                String jsonStr = new Gson().toJson(mapItems);
+//                System.out.println(jsonStr);
+//                Log.d("myRes",  jsonStr);
+
+
+                Data[] data = new Gson().fromJson(resStr, Data[].class);
+                Log.d("myRes",  data[2].user_id.toString());
+
+
+
 
 
                     // получаем экземпляр элемента ListView
@@ -122,5 +143,29 @@ public class ProfileActivity extends Activity{
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public class Data {
+         String user_id;
+         String _id;
+         Number number;
+         String type;
+         String place;
+         String data;
+         String date_completion;
+         String _v;
+
+//        public String getUserId() { return user_id; }
+//        public Number getNumber() { return number; }
+//
+//
+//        public void setUserId(String user_id) { this.user_id = user_id; }
+//        public void setNumber(Number number) { this.number = number; }
+
+
+//        public String toString() {
+//            return String.format("title:%s,id:%d,children:%s,groups:%s", title, id, children, groups);
+//        }
     }
 }
