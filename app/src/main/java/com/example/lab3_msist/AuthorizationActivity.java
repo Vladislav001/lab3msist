@@ -86,7 +86,7 @@ public class AuthorizationActivity extends AppCompatActivity {
                     JSONObject json = new JSONObject(resStr);
 
                     if (json.has("token")) {
-                        Intent intent = new Intent(AuthorizationActivity.this, Profile.class);
+                        Intent intent = new Intent(AuthorizationActivity.this, ProfileActivity.class);
                         intent.putExtra("token", json.get("token").toString());
                         startActivity(intent);
                     } else if(json.has("errors")){

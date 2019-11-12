@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -25,7 +26,7 @@ import okhttp3.Response;
 
 // http://developer.alexanderklimov.ru/android/views/listview.php
 
-public class Profile extends Activity{
+public class ProfileActivity extends Activity{
 
     private String url= "https://lab1msist.herokuapp.com/profile";
 
@@ -41,7 +42,7 @@ public class Profile extends Activity{
                 .url(url)
                 .header("x-access-token", token)
                 .build();
-        new Profile.AsyncHttpRequest().execute(request);
+        new ProfileActivity.AsyncHttpRequest().execute(request);
 
 
 
@@ -69,37 +70,37 @@ public class Profile extends Activity{
             try {
 
                 String resStr = response.body().string().toString();
-                Log.d("myList",  resStr);
+
+
+                    // получаем экземпляр элемента ListView
+                    ListView listView = findViewById(R.id.listView);
+
+
+                    final String[] catNames = new String[] {
+                            "Рыжик", "Барсик", "Мурзик", "Мурка", "Васька",
+                            "Томасина", "Кристина", "Пушок", "Дымка", "Кузя",
+                            "Китти", "Масяня", "Симба"
+                    };
+
+                    // используем адаптер данных
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(ProfileActivity.this,
+                            android.R.layout.simple_list_item_1, catNames);
+
+                    listView.setAdapter(adapter);
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
+                                                long id) {
+                            Intent intent = new Intent(ProfileActivity.this, DetailActivity.class);
+                            // конкретные данные
+                            startActivity(intent);
+
+                        }
+                    });
 
 
 
-
-                // получаем экземпляр элемента ListView
-                ListView listView = findViewById(R.id.listView);
-
-
-                final String[] catNames = new String[] {
-                        "Рыжик", "Барсик", "Мурзик", "Мурка", "Васька",
-                        "Томасина", "Кристина", "Пушок", "Дымка", "Кузя",
-                        "Китти", "Масяня", "Симба"
-                };
-
-                // используем адаптер данных
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(Profile.this,
-                        android.R.layout.simple_list_item_1, catNames);
-
-                listView.setAdapter(adapter);
-
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
-                                            long id) {
-                        Intent intent = new Intent(Profile.this, DetailActivity.class);
-                        // конкретные данные
-                        startActivity(intent);
-
-                    }
-                });
 
             } catch (IOException e) {
                 e.printStackTrace();
