@@ -45,32 +45,6 @@ public class Profile extends Activity{
 
 
 
-        // получаем экземпляр элемента ListView
-        ListView listView = findViewById(R.id.listView);
-
-        // определяем строковый массив
-        final String[] catNames = new String[] {
-                "Рыжик", "Барсик", "Мурзик", "Мурка", "Васька",
-                "Томасина", "Кристина", "Пушок", "Дымка", "Кузя",
-                "Китти", "Масяня", "Симба"
-        };
-
-        // используем адаптер данных
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, catNames);
-
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
-                                    long id) {
-                Intent intent = new Intent(Profile.this, DetailActivity.class);
-                // конкретные данные
-                startActivity(intent);
-
-            }
-        });
 
     }
 
@@ -96,6 +70,36 @@ public class Profile extends Activity{
 
                 String resStr = response.body().string().toString();
                 Log.d("myList",  resStr);
+
+
+
+
+                // получаем экземпляр элемента ListView
+                ListView listView = findViewById(R.id.listView);
+
+
+                final String[] catNames = new String[] {
+                        "Рыжик", "Барсик", "Мурзик", "Мурка", "Васька",
+                        "Томасина", "Кристина", "Пушок", "Дымка", "Кузя",
+                        "Китти", "Масяня", "Симба"
+                };
+
+                // используем адаптер данных
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(Profile.this,
+                        android.R.layout.simple_list_item_1, catNames);
+
+                listView.setAdapter(adapter);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
+                                            long id) {
+                        Intent intent = new Intent(Profile.this, DetailActivity.class);
+                        // конкретные данные
+                        startActivity(intent);
+
+                    }
+                });
 
             } catch (IOException e) {
                 e.printStackTrace();
