@@ -10,5 +10,7 @@ public class DetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
 
+        Bundle arguments = getIntent().getExtras();
+        String token = arguments.get("token").toString();
     }
 }

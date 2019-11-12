@@ -32,6 +32,7 @@ public class ProfileActivity extends Activity{
 
     private String url= "https://lab1msist.herokuapp.com/profile";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,11 @@ public class ProfileActivity extends Activity{
 
     // Обрабатываем нажатие кнопки "Добавить показания":
     public void AddCounter(View view) {
+        Bundle arguments = getIntent().getExtras();
+        String token = arguments.get("token").toString();
+
         Intent intent = new Intent(ProfileActivity.this, AddActivity.class);
+        intent.putExtra("token", token);
         startActivity(intent);
     }
 
