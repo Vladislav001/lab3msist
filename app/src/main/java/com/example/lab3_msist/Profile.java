@@ -34,14 +34,14 @@ public class Profile extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
 
-//        Bundle arguments = getIntent().getExtras();
-//        String token = arguments.get("token").toString();
-//
-//        final Request request = new Request.Builder()
-//                .url(url)
-//                .header("x-access-token", token)
-//                .build();
-//        new Profile.AsyncHttpRequest().execute(request);
+        Bundle arguments = getIntent().getExtras();
+        String token = arguments.get("token").toString();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .header("x-access-token", token)
+                .build();
+        new Profile.AsyncHttpRequest().execute(request);
 
 
 
