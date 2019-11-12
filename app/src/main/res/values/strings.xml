@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">lab3_msist</string>
     <string name="login_success">Вы успешно залогинились!</string>
-
+    <string-array name="type_counter">
+        <item>Водяной</item>
+        <item>Газовый</item>
+    </string-array>
+    <string-array name="place">
+        <item>Кухня</item>
+        <item>Ванная</item>
+        <item>Комната 1</item>
+        <item>Комната 2</item>
+        <item>Другое</item>
+    </string-array>
 </resources>
