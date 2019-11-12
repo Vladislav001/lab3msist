@@ -105,9 +105,11 @@ public class ProfileActivity extends Activity{
                                                 long id) {
                             Bundle arguments = getIntent().getExtras();
                             String token = arguments.get("token").toString();
+                            String idCounter = "5da48f706bae3d04c4714235";
 
                             Intent intent = new Intent(ProfileActivity.this, DetailActivity.class);
                             intent.putExtra("token", token);
+                            intent.putExtra("id", idCounter);
                             startActivity(intent);
 
                         }

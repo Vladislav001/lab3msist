@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -23,18 +25,20 @@ import okhttp3.Response;
 public class DetailActivity extends Activity {
 
     private String url= "https://lab1msist.herokuapp.com/counter/";
-
+    private TextView detailInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_activity);
 
+        detailInformation = (TextView) findViewById(R.id.DetailInformation);
         Bundle arguments = getIntent().getExtras();
         String token = arguments.get("token").toString();
+        String id = arguments.get("id").toString();
 
         final Request request = new Request.Builder()
-                .url(url + "5da48f706bae3d04c4714235")
+                .url(url + id)
                 .header("x-access-token", token)
                 .build();
         new DetailActivity.AsyncHttpRequest().execute(request);
@@ -60,6 +64,7 @@ public class DetailActivity extends Activity {
             try {
 
                 String resStr = response.body().string().toString();
+                detailInformation.setText(resStr);
                 Log.d("myRes",  resStr);
             } catch (IOException e) {
                 e.printStackTrace();
