@@ -88,35 +88,20 @@ public class ProfileActivity extends Activity{
                 String resStr = response.body().string();
                 Log.d("myRes",  resStr);
 
-                // Now do the magic.
-                //Data data = new Gson().fromJson(resStr, Data.class);
-
-//                Map<Integer, Data> mapItems = new HashMap<Integer, Data>();
-//                String jsonStr = new Gson().toJson(mapItems);
-//                System.out.println(jsonStr);
-//                Log.d("myRes",  jsonStr);
-
-
                 Data[] data = new Gson().fromJson(resStr, Data[].class);
-                Log.d("myRes",  data[2].user_id.toString());
 
+                final String[] ids = new String[data.length];
 
-
-
+                for(int i = 0; i < data.length; i++){
+                    ids[i] = data[i]._id;
+                }
 
                     // получаем экземпляр элемента ListView
                     ListView listView = findViewById(R.id.listView);
 
-
-                    final String[] catNames = new String[] {
-                            "Рыжик", "Барсик", "Мурзик", "Мурка", "Васька",
-                            "Томасина", "Кристина", "Пушок", "Дымка", "Кузя",
-                            "Китти", "Масяня", "Симба"
-                    };
-
                     // используем адаптер данных
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(ProfileActivity.this,
-                            android.R.layout.simple_list_item_1, catNames);
+                            android.R.layout.simple_list_item_1, ids);
 
                     listView.setAdapter(adapter);
 
@@ -126,7 +111,9 @@ public class ProfileActivity extends Activity{
                                                 long id) {
                             Bundle arguments = getIntent().getExtras();
                             String token = arguments.get("token").toString();
-                            String idCounter = "5da48f706bae3d04c4714235";
+
+                            TextView textView = (TextView) itemClicked;
+                            String idCounter = textView.getText().toString(); // получаем id нажатого элемента
 
                             Intent intent = new Intent(ProfileActivity.this, DetailActivity.class);
                             intent.putExtra("token", token);
@@ -135,8 +122,6 @@ public class ProfileActivity extends Activity{
 
                         }
                     });
-
-
 
 
             } catch (IOException e) {
