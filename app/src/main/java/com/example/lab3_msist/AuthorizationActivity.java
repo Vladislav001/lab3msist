@@ -95,13 +95,11 @@ public class AuthorizationActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), error.get("message").toString(), Toast.LENGTH_SHORT).show();
                     }
 
-//                    Log.d("myJson",  json.toString());
+//       Log.d("myJson",  json.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-              // Log.d("myRes", "ad");
-                //txtRequest.setText(response.body().string());
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -103,8 +103,11 @@ public class ProfileActivity extends Activity{
                         @Override
                         public void onItemClick(AdapterView<?> parent, View itemClicked, int position,
                                                 long id) {
+                            Bundle arguments = getIntent().getExtras();
+                            String token = arguments.get("token").toString();
+
                             Intent intent = new Intent(ProfileActivity.this, DetailActivity.class);
-                            // конкретные данные
+                            intent.putExtra("token", token);
                             startActivity(intent);
 
                         }
